@@ -1,0 +1,59 @@
+###
+### Copyright (c) 2004 Keda Telecom, Inc.
+###
+
+#########################################################################
+###
+###  DESCRIPTION:
+###    Common definitions for all Makefiles in OSP linux project.
+###
+#########################################################################
+
+TOP := ..
+
+COMM_DIR := ./
+
+SRC_DIR := $(TOP)/source
+
+CURDIR := ./
+
+## Name and type of the target for this Makefile
+
+ARC_TARGET      := kdvmedianet
+
+## Define debugging symbols
+DEBUG = 1
+LINUX_COMPILER= _ANDROID_
+PWLIB_SUPPORT = 0
+
+## Object files that compose the target(s)
+
+OBJS := $(SRC_DIR)/kdvsocket_linux	\
+        $(SRC_DIR)/kdvrtp	\
+        $(SRC_DIR)/kdvrtcp	\
+        $(SRC_DIR)/kdvnetsnd	\
+        $(SRC_DIR)/kdvnetrcv	\
+        $(SRC_DIR)/kdvmedianet	\
+        $(SRC_DIR)/kdvloopbuf	\
+        $(SRC_DIR)/common
+
+## Libraries to include in shared object file
+        
+#LIBS :=  
+
+CFLAGS += -D_ANDROID_
+
+## Add driver-specific include directory to the search path
+
+INC_PATH += $(CURDIR) $(CURDIR)/../include/ \
+	    $(CURDIR)/../../../10-Common/include/cbb \
+	    /opt/android-ndk-r9d/platforms/android-12/arch-arm/usr/include/
+
+ifeq ($(PWLIB_SUPPORT),1)
+   INC_PATH += $(PWLIBDIR)/include/ptlib/unix $(PWLIBDIR)/include
+endif
+
+INSTALL_LIB_PATH = ../../../10-Common/lib/debug/android
+
+include $(COMM_DIR)/common.mk
+

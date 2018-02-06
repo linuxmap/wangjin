@@ -1,0 +1,15 @@
+#!/bin/sh
+
+cd prj_android
+
+echo "compileing kdmtsps makefile_android_arm_r8_r"
+make -f makefile_android_r clean
+make -f makefile_android_r 
+echo "compile kdmtsps makefile_android_arm_r8_r completed"
+
+echo "compileing kdmtsps makefile_android_x86_r"
+make -f makefile_android_r clean
+make -f makefile_android_r APP_ABI=x86
+echo "compile kdmtsps makefile_android_x86_r completed"
+
+cd ..

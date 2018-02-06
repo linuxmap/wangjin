@@ -1,0 +1,11 @@
+#!/bin/sh
+
+cd prj_linux
+
+
+COMPILE_LINUX=../../../10-Common/include/common_compile_linux.mk
+
+make -f $COMPILE_LINUX TARGET=kdmtsps LINUX_COMPILER=_RHEL6_ DEBUG=1 ARCH_BITS=64
+make -f $COMPILE_LINUX TARGET=kdmtsps LINUX_COMPILER=_RHEL6_ DEBUG=0 ARCH_BITS=64
+
+cd ..

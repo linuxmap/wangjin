@@ -1,0 +1,9 @@
+#!/bin/sh
+
+rm -f gbsppt.tar
+rm -f *.so
+cp ../lib/debug/* ./
+tar -cvf gbsppt.tar *.so gbsppt config.ini
+rm -f *.so
+echo 版本制作成功
+

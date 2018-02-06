@@ -1,0 +1,66 @@
+###
+### Copyright (c) 2004 Keda Telecom, Inc.
+###
+
+#########################################################################
+###
+###  DESCRIPTION:
+###    Common definitions for all Makefiles in TARGET linux project.
+###
+#########################################################################
+
+TOP := ..
+COMM_DIR := ../../../10-Common
+SRC_DIR := $(TOP)/source
+
+## Name and type of the target for this Makefile
+ifeq ($(TARGET),)
+  TARGET = kdmtsps
+endif
+
+#APP_TARGET := $(TARGET)
+ARC_TARGET	:= $(TARGET)
+#SO_TARGET	:= $(TARGET)
+
+
+## Define debugging symbols
+DEBUG = 0
+PWLIB_SUPPORT = 0
+LINUX_COMPILER=_LINUX_# _RHEL4_, _RHEL5_, _UBUNTU_, _LINUX_, _ARM_AM1808_, _ARM_AM8168_ and so on
+
+CFLAGS += -D_LINUX_
+
+
+## Add driver-specific include directory to the search path
+INC_PATH += $(TOP)/include \
+            $(COMM_DIR)/include/cbb \
+            $(COMM_DIR)/include/cbb/kdmtsps
+
+            
+## Libraries to include in shared object file
+#LIBS :=  
+
+#########################################################################
+###The following contents are usually not modified
+#########################################################################
+
+## Object files that compose the target(s)
+C_FILES := $(wildcard $(SRC_DIR)/*.c)
+CPP_FILES := $(wildcard $(SRC_DIR)/*.cpp)
+
+OBJS := $(C_FILES:%.c=%)
+OBJS += $(CPP_FILES:%.cpp=%)
+
+
+##The component vars (eg. PRJ_CONF PRJ_VER) for path are defined in common.mk
+ifeq ($(PRJ_VER),)
+	PRJ_VER = linux
+endif
+
+LIB_PATH := $(COMM_DIR)/lib/$(PRJ_CONF)/$(PRJ_VER) \
+
+
+INSTALL_LIB_PATH = $(COMM_DIR)/lib/$(PRJ_CONF)/$(PRJ_VER)
+#INSTALL_APP_PATH = $(COMM_DIR)/version/$(PRJ_CONF)/$(PRJ_VER)/$(APP_TARGET)
+
+include $(COMM_DIR)/include/common.mk

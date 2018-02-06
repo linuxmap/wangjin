@@ -1,0 +1,23 @@
+#!/bin/sh
+
+set -e
+if [ -f etc/config.ini ];then
+    cp etc/config.ini ./config.ini.bak
+fi
+
+rm -rf ./lib ./etc gbsppt
+
+tar -xvf gbsppt.tar
+mkdir lib etc
+
+if [ -f ./config.ini.bak ];then
+    mv ./config.ini.bak ./etc/config.ini
+    rm ./config.ini
+else
+    mv cnofig.ini ./etc/
+fi
+
+mv *.so ./lib/
+echo "update successfully"
+
+

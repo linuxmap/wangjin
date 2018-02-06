@@ -1,0 +1,10 @@
+LIBRARY NIMediaNet
+EXPORTS
+
+Media_Net_Init																@1
+Media_Net_Cleanup															@2
+Media_Net_Login																@3
+Media_Net_Logout															@4
+Media_Net_RealPlay															@5
+Media_Net_StopRealPlay														@6
+Media_Net_QueryVideoRecord													@7

@@ -1,0 +1,10 @@
+#!/bin/sh
+
+cd prj_android
+
+echo "compileing kdvmedianet makefile_android_arm_r8_r"
+make -f makefile_android_arm_r8_r clean
+make -f makefile_android_arm_r8_r 
+echo "compile kdvmedianet makefile_android_arm_r8_r completed"
+
+cd ..

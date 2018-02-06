@@ -1,0 +1,58 @@
+###
+### Copyright (c) 2004 Keda Telecom, Inc.
+###
+
+#########################################################################
+###
+###  DESCRIPTION:
+###    Common definitions for all Makefiles in OSP linux project.
+###
+#########################################################################
+
+TOP := ..
+
+COMM_DIR := ./
+
+SRC_DIR := $(TOP)/source
+
+CURDIR := ./
+INC_DIR := ../include
+COMN_DIR    := ./../../../10-Common
+## Name and type of the target for this Makefile
+
+LIB_TARGET      := kdmtsps64.a
+
+## Define debugging symbols
+CFLAGS += -Wall
+CFLAGS += -D_IOS_ -D_ARM_ -DSVN_TEST=$(svnVersion) -w
+
+## Object files that compose the target(s)
+
+OBJS := $(SRC_DIR)/bits	\
+        $(SRC_DIR)/common	\
+        $(SRC_DIR)/pes \
+        $(SRC_DIR)/psread \
+        $(SRC_DIR)/pswrite \
+        $(SRC_DIR)/tsps \
+        $(SRC_DIR)/tsread \
+        $(SRC_DIR)/tswrite 	
+
+## Libraries to include in shared object file
+        
+#LIBS :=  
+
+## Add driver-specific include directory to the search path
+
+INC_PATH += $(CURDIR) $(CURDIR)/../include/ \
+	    $(CURDIR)/../../../10-Common/include/cbb/\
+	    $(CURDIR)/../../../10-Common/include/cbb/kdmtsps
+
+#ifeq ($(PWLIB_SUPPORT),1)
+#   INC_PATH += $(PWLIBDIR)/include/ptlib/unix $(PWLIBDIR)/include
+#endif
+
+INSTALL_LIB_PATH = ../../../10-Common/lib/release/ios_arm64
+
+## ==================================================
+BUILD_PATH = ../../../10-Common/build/buildscript_ios
+include $(BUILD_PATH)/ios_do_static_arm64.mk

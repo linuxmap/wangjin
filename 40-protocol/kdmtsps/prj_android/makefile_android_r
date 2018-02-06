@@ -1,0 +1,56 @@
+TOP := ..
+
+SRC_DIR := ../source
+
+COMM_DIR := ../../../10-Common
+
+## Name and type of the target for this Makefile
+
+LIB_TARGET	:= libkdmtsps.a
+
+## Define debugging symbols
+CFLAGS += -Wall
+CFLAGS += -DOSP_MAX_NODE_NUM=64
+CFLAGS += -D_LINUX_
+CFLAGS += -D_ANDROID_
+CFLAGS += -D_ARM_
+CFLAGS += -fno-omit-frame-pointer -fms-extensions
+CFLAGS += -fpermissive
+CFLAGS += -fno-exceptions -fno-rtti
+CFLAGS += -w
+
+## Object files that compose the target(s)
+OBJS :=	$(SRC_DIR)/bits	\
+        $(SRC_DIR)/common	\
+        $(SRC_DIR)/pes	\
+        $(SRC_DIR)/psread	\
+        $(SRC_DIR)/pswrite \
+	    $(SRC_DIR)/tsps 	\
+		$(SRC_DIR)/tsread	\
+		$(SRC_DIR)/tswrite	
+
+## Libraries to include in shared object file
+
+INC_PATH += $(TOP)/include \
+            $(COMM_DIR)/include/cbb \
+            $(COMM_DIR)/include/cbb/kdmtsps \
+            $(COMM_DIR)/include/cbb/medianet	
+	
+	
+
+LIBS :=	
+
+LIB_PATH += ./../../pxmsg_mmap/prj_android/
+
+ifeq ($(APP_ABI), x86)
+	INSTALL_DBG_PATH  := $(COMM_DIR)/lib/debug/android_x86
+	INSTALL_RLS_PATH  := $(COMM_DIR)/lib/release/android_x86
+else
+	INSTALL_DBG_PATH  := $(COMM_DIR)/lib/debug/android_arm
+	INSTALL_RLS_PATH  := $(COMM_DIR)/lib/release/android_arm
+endif	
+
+## ==================================================
+BUILD_PATH = ../../../10-Common/build/
+include $(BUILD_PATH)/do_static.mk
+#include $(BUILD_PATH)/do_binary.mk

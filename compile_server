@@ -1,0 +1,72 @@
+#!/bin/sh
+
+#############################
+## compile 20-dir first
+#############################
+cd 20-opensrc/inih
+make clean
+make
+cd -
+
+cd 20-opensrc/tinyxml2
+make clean
+make
+cd -
+
+#############################
+##  compile 30-dir first
+#############################
+cd 30-cbb/debug
+make clean
+make
+cd - 
+
+cd 30-cbb/oscbb
+make clean
+make
+cd - 
+
+cd 30-cbb/osp_linux_epoll
+make clean
+make
+cd - 
+
+
+
+
+#############################
+## compile 40-dir second
+#############################
+cd 40-protocol/dataswitch_socket
+make clean
+make
+cd - 
+
+cd 40-protocol/gb28181client
+make clean
+make
+cd - 
+
+cd 40-protocol/sdp
+make clean
+make
+cd - 
+
+
+#############################
+## compile 40-dir second
+#############################
+cd 10-app/vtdu
+make clean
+make
+cd -
+
+cd 10-app/gb28181
+make clean
+make
+cd -
+
+cd 10-app/nvr
+make clean
+make
+cd -
